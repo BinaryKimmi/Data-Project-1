@@ -2,6 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+from datetime import date
 
 load_dotenv(dotenv_path = "./.env")
 
@@ -123,19 +124,26 @@ def extract_video_data(video_ids):
         raise e
 
 
+def save_to_json(extracted_data):
+    file_path = f"./data/YT_data_{date.today()}.json"
+
+    ##use context manager to write file (efficent ways of opening, writing and closing files)
+    with open(file_path, "w", encoding="utf-8") as json_outfile:
+        json.dump(extracted_data, json_outfile, indent=4, ensure_ascii=False)
 
 
 
-###Before running a Python file, the interpreter sets a few special variables. O
+###Before running a Python file, the interpreter sets a few special variables. 
 ### One of them is __name__. If a Python file is run directly, Python sets __name__ to "__main__".
 ###If the same file is imported into another file, __name__ is set to the module’s name.
-### The condition if __name__ == "__main__": evaluates to False, and the code block is skipped. 
+### If The condition if __name__ == "__main__": evaluates to False, and the code block is skipped. 
 ###This allows you to control which parts of the code execute in different contexts. 
-
 if __name__ == "__main__":
     playlistId = get_playlist_id()
     video_ids = get_video_ids(playlistId)
-    print(extract_video_data(video_ids))
+    video_data = extract_video_data(video_ids)
+    save_to_json(video_data)
+  #  print(extract_video_data(video_ids))
     #print(get_video_ids(playlistId))
 
 
