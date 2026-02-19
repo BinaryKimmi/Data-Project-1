@@ -147,3 +147,4 @@ if __name__ == "__main__":
     #print(get_video_ids(playlistId))
 
 
+#source .venv/bin/activate
