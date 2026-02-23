@@ -5,7 +5,7 @@ ARG PYTHON_VERSION=3.10
 FROM apache/airflow:${AIRFLOW_VERSION}-python${PYTHON_VERSION}
 
 ## define airflow environment variable
-ENV AIRFLOW_HOME = /opt/airflow
+ENV AIRFLOW_HOME=/opt/airflow
 
 ##copy the requirements.txt file from our local directory to the root directory of the
 ##docker images file system 
